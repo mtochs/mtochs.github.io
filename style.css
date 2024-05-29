@@ -5,7 +5,8 @@
     --white-transparent: rgba(255, 255, 255, 0.3);
     --gray-transparent: #EAECF04D;
     --gray-hidden: #42546680;
-    --gray-hidden2: #42546666;
+    --gray-hidden2: rgba(66, 84, 102, 0);
+    --gray-hidden3: #42546666;
     --gray: #425466;
 
     --light-bue: #C5DAEE;
@@ -13,6 +14,8 @@
     --blue: #005DE8;
     --dark-blue: #000080;
     --black: #05263F;
+    --blue-transparent: #005DE866;
+    --black-transporent: #00008033;
 }
 
 body {
@@ -181,7 +184,7 @@ main {
 .amount {
     font-size: 15.28px;
     margin-top: 7px;
-    color: var(--gray-hidden2);
+    color: var(--gray-hidden3);
 }
 
 .amount-prise {
@@ -201,6 +204,56 @@ main {
 .range img {
     width: 179px;
     height: 30px;
+}
+
+.range-inner {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.range-item {
+    width: 1px;
+    border: 1px solid var(--gray-hidden3);
+    border-radius: 1px;
+}
+
+.range-item-min {
+    height: 11px;
+}
+
+.range-item-max {
+    height: 18px;
+}
+
+.range-itemLast {
+    height: 30.57px;
+
+    border-color: var(--blue);
+    box-shadow: 0px -0px 0px 1px var(--blue);
+    transition: border-color .3s ease-in-out, box-shadow .3s  ease-in-out;
+    transition-delay: 5.8s;
+    transition-property: border-color, box-shadow ;
+    animation: none;
+
+}
+
+@keyframes rangeItemAnimation {
+    from {
+        border-color: var(--gray-hidden2);
+    }
+    50% {
+        height: 30.57px;
+        border: 1px solid var(--blue);
+        box-shadow: 0px -0px 0px 1px var(--blue)
+    }
+    to {
+        border-color: var(--blue-transparent);
+    }
 }
 
 .min-range {
@@ -730,13 +783,48 @@ input[type='text']::placeholder, input[type='email']::placeholder {
     background-size: 100%;
 }
 
+.embla {
+    overflow: hidden;
+}
+.embla__container {
+    display: flex;
+}
+.embla__slide {
+    flex: 0 0 80%;
+    min-width: 0;
+}
+
 .carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-wrapper {
     width: 100%;
     margin-top: 50px;
     display: flex;
     flex-wrap: nowrap;
-    overflow: hidden;
 }
+.navigation {
+    margin-top: 40px;
+}
+
+.navigation .embla__dot--selected {
+    background-color: var(--black);
+}
+
+.navigation button{
+    width: 50px;
+    height: 4px;
+    margin: 0 5px;
+    background-color: var(--black-transporent);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 
 .review {
     min-width: 850px;
@@ -807,7 +895,9 @@ input[type='text']::placeholder, input[type='email']::placeholder {
 
 .question {
     width: 850px;
-    padding: 30px;
+    /*padding: 30px;*/
+    max-height: 86px;
+    overflow: hidden;
     position: relative;
     display: flex;
     margin-bottom: 20px;
@@ -815,7 +905,10 @@ input[type='text']::placeholder, input[type='email']::placeholder {
     background-color: var(--main-bg);
     border: 0.9px solid var(--border-bg);
     border-radius: 11.08px;
+
+    transition: max-height 0.7s ease-in-out;
 }
+
 
 .question::before {
     content: '';
@@ -825,7 +918,30 @@ input[type='text']::placeholder, input[type='email']::placeholder {
     top: 30px;
     right: 15px;
     background: url(./img/chevron-down.svg) no-repeat;
+    transition: height .2s ease-in-out;
+
 }
+.question.active{
+    max-height: 500px;
+}
+
+.question .title-min {
+    padding: 30px;
+    margin-bottom: 0;
+}
+
+.question.active .title-min {
+    padding-bottom: 18px;
+}
+.question.active:before {
+    transform: rotate(180deg);
+    transition: transform .7s ease-in-out;
+}
+
+.question .sub-title-min {
+    padding: 0px 30px 30px
+}
+
 
 .wrapper-footer {
     padding: 40px 75px;
