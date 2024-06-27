@@ -156,6 +156,7 @@ main {
     width: 634.96px;
     height: 501.96px;
     z-index: 5;
+    max-width: 634.96px;
 }
 
 .price-box:before {
