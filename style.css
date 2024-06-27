@@ -75,6 +75,11 @@ header {
 .btn-blue:active {
     background-color: var(--dark-blue);
 }
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px; /* Optional: Add some padding for better spacing */
+}
 
 
 main {
