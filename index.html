@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+    <title>Banklink</title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div class="wrapper-header">
+        <div class="logo-name">
+            <img class="logo" src="./img/logo.svg" alt="Banklink">
+            <img class="name" src="./img/logo-name.svg" alt="Banklink">
+        </div>
+
+        <div class="wrapper-btn-link">
+            <a class="link" href="./lenders/index.html">For Lenders</a>
+            <a href="mailto:info@banklink.ai"><button class="btn btn-blue">Contact Us</button></a>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="wrapper-first-screen">
+        <div class="title-part">
+            <h1 class="title title-big">Simplify your commercial loan journey</h1>
+            <p class="sub-title">Get pre-approved loan offers tailored to your business needs for free.</p>
+            <a href="mailto:info@banklink.ai"><button class="btn btn-blue">Contact us to start your journey</button></a>
+        </div>
+        <div class="price-box">
+            <div class="range-box">
+                <p class="sub-title">Find the loan amount that suites your business needs</p>
+                <p class="amount">Amount</p>
+                <p class="amount-prise"><span class="hidden">$</span><span id="amount">100k</span></p>
+                <div class="range">
+                    <div class="min-range">$100k</div>
+                    <div class="range-inner">
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                        <div class="range-item range-item-max"></div>
+                        <div class="range-item range-item-min"></div>
+                    </div>
+                    <div class="max-range">$100m</div>
+                </div>
+            </div>
+            <div class="bar-chart-box">
+                <img src="./img/line_and_bar_chart.svg" alt="line and bar chart">
+            </div>
+            <div class="revenue-box"></div>
+            <div class="icon-box dollar-icon"></div>
+            <div class="icon-box people-icon"></div>
+            <div class="icon-box bank-icon"></div>
+            <div class="icon-box card-icon"></div>
+        </div>
+    </div>
+    <div class="wrapper-second-screen">
+        <h2 class="title title-middle">How it works</h2>
+        <div class="steps-life-cycle">
+            <div class="steps">
+                <div class="step">
+                    <div class="label"><p>Step 1</p></div>
+                    <h3 class="sub-title">Sign up and create your profile with basic business information.</h3>
+                </div>
+                <div class="step">
+                    <div class="label"><p>Step 2</p></div>
+                    <h3 class="sub-title">Submit your loan application and upload your financial documents.</h3>
+                </div>
+                <div class="step">
+                    <div class="label"><p>Step 3</p></div>
+                    <h3 class="sub-title">Our platform processes your documents and creates a loan profile.</h3>
+                </div>
+                <div class="step">
+                    <div class="label"><p>Step 4</p></div>
+                    <h3 class="sub-title">Receive instant loan matches based on your financial profile.</h3>
+                </div>
+                <div class="step">
+                    <div class="label"><p>Step 5</p></div>
+                    <h3 class="sub-title">Compare multiple banking offers and choose the best partner.</h3>
+                </div>
+                <div class="step">
+                    <div class="label"><p>Step 6</p></div>
+                    <h3 class="sub-title">Finalize your loan agreement and receive funds to grow your business.</h3>
+                </div>
+            </div>
+            <div class="life-cycle">
+               <div class="life-cycle-wrapper">
+                   <div class="circle-icon-big circle-icon-user">
+                       <div class="icon-user">
+                           <img src="./img/user.svg" alt="user">
+                       </div>
+                       <p class="icon-circle-text">Sign up and create your profile</p>
+                   </div>
+                   <div class="die die-submit">Submit your loan application</div>
+                   <div class="circle-icon-big circle-icon-setting">
+                       <div class="icon-setting">
+                           <img src="./img/setting.svg" alt="setting">
+                       </div>
+                       <p class="icon-circle-text">Automated document processing</p>
+                   </div>
+                   <div class="die die-install">Instant loan matches</div>
+                   <div class="circle-icon-big circle-icon-loupe">
+                       <div class="icon-loupe">
+                           <img src="./img/loupe.svg" alt="setting">
+                       </div>
+                       <p class="icon-circle-text">Compare offers and choose your best banking partner</p>
+                   </div>
+                   <div class="die die-borrower">Borrower finalizes loan</div>
+
+                   <div class="logo-name">
+                       <img class="logo" src="./img/logo.svg" alt="Banklink">
+                       <img class="name" src="./img/logo-name.svg" alt="Banklink">
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-third-screen">
+        <center>
+        <p class="label">Loan Types Overview</p>
+        <h2 class="title title-middle">Explore a variety of loan types designed to meet your business's unique financial needs.</h2>
+        </center>
+        <div class="loan-types">
+            <div class="loan-type">
+                <div class="circle-icon bar-chart-icon">
+                    <img src="./img/bar_chart.svg" alt="bar chart">
+                </div>
+                <div class="title-min">Working Capital (Lines of Credit)</div>
+                <p class="sub-title-min">Finalize your loan agreement with the chosen banking partner. Receive the funds to grow and expand your business.</p>
+            </div>
+            <div class="loan-type">
+                <div class="circle-icon">
+                    <img src="./img/chart-arrow-up.svg" alt="arrow up">
+                </div>
+                <div class="title-min">Equipment Financing or Leasing</div>
+                <p class="sub-title-min">Tailored solutions to acquire or lease the equipment essential for your business.</p>
+            </div>
+            <div class="loan-type">
+                <div class="circle-icon">
+                    <img src="./img/home.svg" alt="home">
+                </div>
+                <div class="title-min">Construction/Owner-Occupied Real Estate</div>
+                <p class="sub-title-min">Custom loans to fund your construction projects or purchase real estate.</p>
+            </div>
+            <div class="loan-type">
+                <div class="circle-icon">
+                    <img src="./img/briefcase.svg" alt="home">
+                </div>
+                <div class="title-min">Business Acquisition Financing</div>
+                <p class="sub-title-min">Strategic financing to support the acquisition and expansion of your business.</p>
+            </div>
+            <div class="loan-type">
+                <div class="circle-icon">
+                    <img src="./img/chart-bar2.svg" alt="chart bar">
+                </div>
+                <div class="title-min">Industry-Specific Applications</div>
+                <p class="sub-title-min">Discover loans with conditions that cater specifically to your industry's standards.</p>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-fourth-screen">
+        <div class="title title-middle">Key features and benefits</div>
+        <div class="features-benefits">
+            <div class="feature-benefit">
+                <div class="img-box">
+                    <div class="feature-benefit-img img-threeDocuments"></div>
+                    <div class="blur"></div>
+                </div>
+                <div class="features-benefits-text">
+                    <h3 class="title title-middle">Quick and Easy Application</h3>
+                    <p class="sub-title-min">Streamlined application process saves time with a user-friendly platform, allowing you to apply for a commercial loan in just a few clicks.</p>
+                </div>
+            </div>
+            <div class="feature-benefit">
+                <div class="img-box">
+                    <div class="feature-benefit-img img-stack"></div>
+                    <div class="blur"></div>
+                </div>
+                <div class="features-benefits-text">
+                    <h3 class="title title-middle">Secure Document Upload</h3>
+                    <p class="sub-title-min">Upload your financial documents securely with encrypted storage, ensuring your data remains safe and confidential throughout the application process.</p>
+                </div>
+            </div>
+            <div class="feature-benefit">
+                <div class="img-box">
+                    <div class="feature-benefit-img img-docAndIcon"></div>
+                    <div class="blur"></div>
+                </div>
+                <div class="features-benefits-text">
+                    <h3 class="title title-middle">Instant Loan Matches</h3>
+                    <p class="sub-title-min">Get real-time matches with lenders whose criteria fit your loan needs, speeding up the funding process.</p>
+                </div>
+            </div>
+            <div class="feature-benefit">
+                <div class="img-box">
+                    <div class="feature-benefit-img img-magnifier-document"></div>
+                    <div class="blur"></div>
+                </div>
+                <div class="features-benefits-text">
+                    <h3 class="title title-middle">Transparent Loan Offers</h3>
+                    <p class="sub-title-min">Receive clear and detailed loan offers from multiple lenders, allowing you to easily compare terms and conditions to find the best fit.</p>
+                </div>
+            </div>
+            <div class="feature-benefit">
+                <div class="img-box">
+                    <div class="feature-benefit-img img-final-document"></div>
+                    <div class="blur"></div>
+                </div>
+                <div class="features-benefits-text">
+                    <h3 class="title title-middle">Personalized Loan Options</h3>
+                    <p class="sub-title-min">Get loan options tailored to your business needs and profile, ensuring you get the right funding for your growth.</p>
+                </div>
+            </div>
+            <div class="feature-benefit">
+                <div class="img-box">
+                    <div class="feature-benefit-img img-bankCards"></div>
+                    <div class="blur"></div>
+                </div>
+                <div class="features-benefits-text">
+                    <h3 class="title title-middle">Free and No Obligation</h3>
+                    <p class="sub-title-min">Explore loan options with no obligation to accept any offer, giving you the freedom to choose the best deal for your business.</p>
+                </div>
+            </div>
+            <div class="feature-benefit">
+                <div class="img-box">
+                    <div class="feature-benefit-img img-puzzle"></div>
+                    <div class="blur"></div>
+                </div>
+                <div class="features-benefits-text">
+                    <h3 class="title title-middle">Support and Guidance</h3>
+                    <p class="sub-title-min">Access expert support and resources to help you navigate the loan process and make informed decisions for your business.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-fifth-screen">
+        <div class="banner">
+            <div class="wrapper-banner">
+                <a href="mailto:info@banklink.ai"><button class="btn btn-gray">CONTACT US</button></a>
+                <h3 class="title-middle">Secure, simple, and tailored to your business needs</h3>
+                <div class="wrapper-btns">
+                    <button class="btn btn-white">Submit a loan today (Coming soon)</button>
+                    <button class="btn btn-transparent">Discover your best banking options</button>
+                </div>
+            </div>
+        </div>
+<!--
+        <div class="title title-middle">What our clients say</div>
+        <div class="embla carousel">
+            <div class="embla__container carousel-wrapper">
+                <div class="embla__slide review active">
+                    <div class="circle-icon">
+                        <img src="./img/quotes.svg" alt="quotes">
+                    </div>
+                    <div class="comment">
+                        <p>1 Securing a loan for my business has never been easier. With this service, I received multiple pre-approved offers tailored to my specific needs, saving me time and hassle."</p>
+                    </div>
+                    <div class="name">Tony Cross</div>
+                    <div class="job-title">CEO of ABZ Agency</div>
+                </div>
+                <div class="embla__slide review">
+                    <div class="circle-icon">
+                        <img src="./img/quotes.svg" alt="quotes">
+                    </div>
+                    <div class="comment">
+                        <p>2 Securing a loan for my business has never been easier. With this service, I received multiple pre-approved offers tailored to my specific needs, saving me time and hassle."</p>
+                    </div>
+                    <div class="name">Tony Cross</div>
+                    <div class="job-title">CEO of ABZ Agency</div>
+                </div>
+                <div class="embla__slide review">
+                    <div class="circle-icon">
+                        <img src="./img/quotes.svg" alt="quotes">
+                    </div>
+                    <div class="comment">
+                        <p> 3 Securing a loan for my business has never been easier. With this service, I received multiple pre-approved offers tailored to my specific needs, saving me time and hassle."</p>
+                    </div>
+                    <div class="name">Tony Cross</div>
+                    <div class="job-title">CEO of ABZ Agency</div>
+                </div>
+                <div class="embla__slide review">
+                    <div class="circle-icon">
+                        <img src="./img/quotes.svg" alt="quotes">
+                    </div>
+                    <div class="comment">
+                        <p>4 Securing a loan for my business has never been easier. With this service, I received multiple pre-approved offers tailored to my specific needs, saving me time and hassle."</p>
+                    </div>
+                    <div class="name">Tony Cross</div>
+                    <div class="job-title">CEO of ABZ Agency</div>
+                </div>
+
+            </div>
+
+            <div class="navigation embla__dots">
+                <button class="navigation-first"></button>
+                <button class="navigation-second"></button>
+                <button class="navigation-third"></button>
+                <button class="navigation-fourth"></button>
+            </div>
+        </div>
+        <div class="partners">
+            <div class="partner-logo">
+                <img src="./img/boltshift.svg" alt="boltshift"/>
+            </div>
+            <div class="partner-logo">
+                <img src="./img/lightbox.svg" alt="lightbox"/>
+            </div>
+            <div class="partner-logo">
+                <img src="./img/featherDev.svg" alt="featherDev"/>
+            </div>
+            <div class="partner-logo">
+                <img src="./img/spherule.svg" alt="spherule"/>
+            </div>
+            <div class="partner-logo">
+                <img src="./img/globalBank.svg" alt="globalBank"/>
+            </div>
+            <div class="partner-logo">
+                <img src="./img/nietzsche.svg" alt="nietzsche"/>
+            </div>
+            <div class="partner-logo">
+                <img src="./img/epicurious.svg" alt="epicurious"/>
+            </div>
+            <div class="partner-logo">
+                <img src="./img/cloudWatch.svg" alt="cloudWatch"/>
+            </div>
+            <div class="partner-logo">
+                <img src="./img/acmeCorp.svg" alt="acmeCorp"/>
+            </div>
+            <div class="partner-logo">
+                <img src="./img/polymath.svg" alt="polymath"/>
+            </div>
+        </div>
+--!>
+    </div>
+    <div class="wrapper-sixth-screen">
+        <div class="title-middle">Frequently asked question</div>
+        <div class="questions">
+            <div class="question active">
+                <div class="title-min">How does the pre-approval process work?</div>
+                <p class="sub-title-min">The pre-approval process begins with you providing some basic information about your business and financing needs. Our platform then matches you with lenders who offer pre-approved loan offers tailored to your requirements.</p>
+            </div>
+            <div class="question">
+                <div class="title-min">Is there any cost associated with getting pre-approved loan offers?</div>
+                <p class="sub-title-min">The pre-approval process begins with you providing some basic information about your business and financing needs. Our platform then matches you with lenders who offer pre-approved loan offers tailored to your requirements.</p>
+            </div>
+            <div class="question">
+                <div class="title-min">How long does it take to receive pre-approved loan offers?</div>
+                <p class="sub-title-min">The pre-approval process begins with you providing some basic information about your business and financing needs. Our platform then matches you with lenders who offer pre-approved loan offers tailored to your requirements.</p>
+            </div>
+            <div class="question">
+                <div class="title-min">What types of loan offers can I expect to receive?</div>
+                <p class="sub-title-min">The pre-approval process begins with you providing some basic information about your business and financing needs. Our platform then matches you with lenders who offer pre-approved loan offers tailored to your requirements.</p>
+            </div>
+            <div class="question">
+                <div class="title-min">What information do I need to provide to get pre-approved loan offers?</div>
+                <p class="sub-title-min">The pre-approval process begins with you providing some basic information about your business and financing needs. Our platform then matches you with lenders who offer pre-approved loan offers tailored to your requirements.</p>
+            </div>
+            <div class="question">
+                <div class="title-min">Are the pre-approved loan offers binding?</div>
+                <p class="sub-title-min">The pre-approval process begins with you providing some basic information about your business and financing needs. Our platform then matches you with lenders who offer pre-approved loan offers tailored to your requirements.</p>
+            </div>
+        </div>
+
+    </div>
+</main>
+<footer>
+    <div class="wrapper-footer">
+        <div class="logo-name">
+            <img class="logo" src="./img/logo.svg" alt="Banklink">
+            <img class="name" src="./img/logo-name.svg" alt="Banklink">
+        </div>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a href="#">About Us</a></li>
+                <li class="nav-item"><a href="#">Contact</a></li>
+                <li class="nav-item"><a class="hidden" href="#">Privacy Policy</a></li>
+                <li class="nav-item"><a class="hidden" href="#">Terms of Service.</a></li>
+            </ul>
+        </nav>
+        <div class="social-media">
+            <a class="social-media-item" href="#">
+                <img src="./img/facebook.svg" alt="facebook">
+            </a>
+            <a class="social-media-item" href="#">
+                <img src="./img/instagram.svg" alt="instagram">
+            </a>
+            <a class="social-media-item" href="#">
+                <img src="./img/X.svg" alt="X">
+            </a>
+        </div>
+    </div>
+</footer>
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<script src="index.js"></script>
+</body>
