@@ -388,7 +388,6 @@ header {
 .feature-benefit {
     width: 100%;
     min-height: 438px;
-    max-height: 547px;
     margin-bottom: 20px;
     padding: 20px;
     display: flex;
@@ -412,13 +411,14 @@ header {
 }
 .feature-benefit:last-child .img-box .feature-benefit-img,
 .feature-benefit:first-child .img-box .feature-benefit-img {
-    background-size: 107%;
+    background-size: contain;
     background-position: center;
     border: none;
 }
 
 .img-box {
     width: 423px;
+    min-height: 406px;
     height: 406px;
     display: flex;
     position: relative;
@@ -444,6 +444,7 @@ header {
 
 .features-benefits-text {
     width: 457px;
+    margin-left: 20px;
 }
 
 .feature-benefit-img {
@@ -714,6 +715,10 @@ footer {
         position: absolute;
         left: 75%;
     }
+
+    .title-part {
+        width: 70%;
+    }
 }
 
 @media (max-width: 1114px) {
@@ -742,11 +747,6 @@ footer {
         margin-left: 0;
     }
 
-    .title-part .title{
-        font-size: 75px;
-        line-height: 75px;
-    }
-
     .wrapper-banner .btn-transparent{
         margin-left: 0;
         margin-top: 20px;
@@ -767,7 +767,43 @@ footer {
     }
 }
 
+@media (max-width: 1080px) {
+    .wrapper-header {
+        max-width: none;
+        padding: 0 30px;
+    }
+
+    .feature-benefit,
+    .feature-benefit:nth-child(even){
+        flex-direction: column-reverse;
+    }
+
+    .features-benefits-text {
+        width: 90%;
+    }
+
+    .features-benefits-text .sub-title-min {
+        margin-bottom: 30px;
+    }
+
+    .img-box {
+        min-height: 356px;
+        height: 356px;
+    }
+
+}
+
+
 @media (max-width: 1050px) {
+
+    .title-part {
+        width: 657px;
+    }
+
+    .title-part .title {
+        font-size: 55px;
+        line-height: 55px;
+    }
 
     .sub-title {
         font-size: 16px;
@@ -788,49 +824,12 @@ footer {
 
 }
 
-
-@media (max-width: 1080px) {
-    .wrapper-header {
-        max-width: none;
-        padding: 0 30px;
-    }
-
-    .feature-benefit,
-    .feature-benefit:nth-child(even){
-        flex-direction: column-reverse;
-    }
-
-    .features-benefits-text {
-        width: 90%;
-    }
-
-    .features-benefits-text .sub-title-min {
-        margin-bottom: 30px;
-    }
-
-    .feature-benefit:last-child .img-box .feature-benefit-img,
-    .feature-benefit:first-child .img-box .feature-benefit-img {
-        background-position: top;
-    }
-
-    .img-life-cycle {
-        background-size: contain;
-    }
-}
-
-
 @media (max-width: 990px) and (min-width: 910px){
-    .title-part {
-        width: 517px;
-    }
-
-    .title-part .title {
-        font-size: 55px;
-        line-height: 55px;
-    }
-
     .app-img {
-        left: 55%;
+        left: 58%;
+    }
+    .title-part {
+        width: 547px;
     }
 }
 @media (max-width: 980px)  {
@@ -846,6 +845,10 @@ footer {
 }
 
 @media (max-width: 950px)  {
+    .title-part {
+        width: 60%;
+    }
+
     .wrapper-banner .title-middle {
         font-size: 42px;
     }
@@ -853,10 +856,9 @@ footer {
 
 @media (max-width: 910px) {
     .wrapper-first-screen {
+        height: auto;
         flex-direction: column;
-        padding-left: 10px;
-        padding-right: 10px;
-        /*height: 130vh;*/
+        padding: 130px 10px 0;
     }
 
     .app-img {
@@ -898,7 +900,6 @@ footer {
 
     .features-benefits-text {
         width: 100%;
-
     }
 
     .wrapper-fourth-screen .feature-benefit .title {
@@ -965,13 +966,10 @@ footer {
     .step:not(:last-child):before {
         height: 44px;
     }
+
 }
 
 @media (max-width: 770px) {
-
-    .wrapper-first-screen {
-        height: 140vh;
-    }
 
     .wrapper-footer {
         flex-direction: column;
@@ -979,6 +977,7 @@ footer {
     .wrapper-footer .logo-name {
         margin-bottom: 10px;
     }
+
     .wrapper-third-screen .title,
     .title-middle {
         font-size: 42px;
@@ -1049,6 +1048,10 @@ footer {
 
     .wrapper-second-screen {
         padding-bottom: 80px;
+    }
+
+    .img-box .feature-benefit-img{
+        background-size: 70%;
     }
 
     .img-box,
@@ -1124,6 +1127,19 @@ footer {
 
 }
 
+@media only screen and (min-width: 1024px) and (min-height: 1366px) {
+    .wrapper-first-screen {
+        height: 50vh;
+    }
+}
+
+
+@media only screen and (min-width: 912px) and (min-height: 1368px) {
+    .wrapper-first-screen {
+        height: 50vh;
+    }
+}
+
 @media (max-width: 575px) {
 
     .link {
@@ -1131,7 +1147,6 @@ footer {
         margin-right: 10px;
     }
 
-    .wrapper-second-screen,
     .wrapper-third-screen {
         padding: 0 10px 130px;
     }
@@ -1250,6 +1265,10 @@ footer {
         margin-bottom: 50px;
     }
 
+    .features-benefits-text .title {
+        margin: 10px 0;
+    }
+
     .wrapper-second-screen .sub-title {
         margin-bottom: 20px;
     }
@@ -1279,7 +1298,6 @@ footer {
         font-size: 37px;
         line-height: 37px;
     }
-
 }
 
 @media (max-width: 495px) {
@@ -1291,9 +1309,6 @@ footer {
         line-height: 32px;
     }
 
-    .wrapper-first-screen {
-        height: 130vh;
-    }
 
     .wrapper-fourth-screen .feature-benefit .title {
         width: 100%;
@@ -1308,9 +1323,6 @@ footer {
         height: 64px;
     }
 
-
-}
-@media (max-width: 465px) {
 
 }
 
@@ -1329,6 +1341,10 @@ footer {
 
     .wrapper-first-screen {
         padding-top: 110px;
+    }
+
+    .img-box .feature-benefit-img {
+        background-size: 90%;
     }
 }
 
@@ -1364,11 +1380,15 @@ footer {
         line-height: 20px;
     }
 
-
     .app-img {
-        transform: scale(.6);
+        margin-top: -80px;
     }
 
+    .app-img {
+        height: 407px;
+        transform: scale(.6);
+    }
+    
     .wrapper-header .btn{
         min-width: 104px;
         font-size: 15px;
@@ -1383,22 +1403,15 @@ footer {
         width: 34px;
         height: 35px;
     }
-
-    .feature-benefit {
-        max-height: 760px;
-    }
-}
-
-
-@media (max-width: 400px) {
-    .img-box {
-        min-height: 190px;
-    }
 }
 
 @media (max-width: 375px) {
     .features-benefits-text .title {
         font-size: 35px;
+    }
+    .img-box {
+        min-height: 306px;
+        height: 316px;
     }
 }
 
