@@ -1272,9 +1272,8 @@ footer {
 @media (max-width: 910px) {
     .wrapper-first-screen {
         flex-direction: column;
-        padding-left: 10px;
-        padding-right: 10px;
-        height: 140vh;
+        padding: 110px 10px 40px 10px;
+        height: auto;
     }
 
     .wrapper-fourth-screen {
@@ -1549,26 +1548,18 @@ footer {
     }
 
     .price-box {
+        height: 370px;
         transform: scale(0.7);
         top: -10px;
         left: 146px;
     }
 
-    .wrapper-first-screen {
-        height: 120vh;
-    }
 
 }
 @media (max-width: 619px) {
     .review {
         min-width: 480px;
         padding: 20px 20px;
-    }
-}
-
-@media (max-width: 610px) {
-    .wrapper-first-screen {
-        height: 130vh;
     }
 }
 
@@ -1645,6 +1636,20 @@ footer {
 @media (max-width: 522px) {
     .review {
         min-width: fit-content;
+    }
+}
+
+
+@media only screen and (min-width: 1024px) and (min-height: 1366px) {
+    .wrapper-first-screen {
+        height: 50vh;
+    }
+}
+
+
+@media only screen and (min-width: 912px) and (min-height: 1368px) {
+    .wrapper-first-screen {
+        height: 50vh;
     }
 }
 
@@ -1733,10 +1738,6 @@ footer {
         transform: scale(0.6);
         top: -30px;
         left: 123px;
-    }
-
-    .wrapper-first-screen {
-        height: 120vh;
     }
 
     .wrapper-fourth-screen .feature-benefit .title {
@@ -1855,12 +1856,8 @@ footer {
         line-height: 20px;
     }
 
-
-    .wrapper-first-screen {
-        height: 110vh;
-    }
-
     .price-box {
+        height: 270px;
         transform: scale(0.6);
         top: -30px;
         left: 147px;
