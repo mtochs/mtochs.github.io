@@ -106,6 +106,7 @@ header {
     background-repeat: no-repeat;
     background-size: 100%;
     overflow: hidden;
+    max-width: 1440px;
 }
 
 .wrapper-first-screen:before {
