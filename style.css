@@ -110,8 +110,6 @@ header {
     background-repeat: no-repeat;
     background-size: 100%;
     overflow: hidden;
-    max-width: 1440px;
-    margin: 0 auto;
 }
 
 .wrapper-first-screen:before {
