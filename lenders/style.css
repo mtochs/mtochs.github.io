@@ -95,6 +95,11 @@ header {
     transition: .4s;
 }
 
+.content-wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
 .wrapper-first-screen {
     height: 100vh;
     position: relative;
