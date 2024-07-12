@@ -1030,6 +1030,12 @@ footer {
     margin: 0 11px;
 }
 
+@media (min-width: 1440px) {
+    .content-wrapper {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Example shadow, adjust as needed */
+    }
+}
+
 @media (max-width: 1440px ) and (min-width: 1380px) {
     .title-part {
         width: 45%;
