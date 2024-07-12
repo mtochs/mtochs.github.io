@@ -986,7 +986,7 @@ header {
 }
 
 footer {
-    background: var(--main-bg);
+    background: var(--white);
 }
 .wrapper-footer {
     max-width: 1440px;
@@ -995,6 +995,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: var(--main-bg);
 }
 
 .nav {
