@@ -95,9 +95,8 @@ header {
     transition: .4s;
 }
 .content-wrapper {
-    max-width: 1010px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 15px; /* Optional: Add some padding to avoid content touching the edges */
 }
 
 .wrapper-first-screen {
