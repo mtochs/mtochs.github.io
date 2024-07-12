@@ -996,6 +996,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     background: var(--main-bg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .nav {
