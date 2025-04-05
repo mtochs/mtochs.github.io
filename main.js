@@ -15,12 +15,14 @@ const SATELLITE_SIZE = 0.05;
 
 // Threat constants
 const THREAT_COUNT = 3;
-const THREAT_SIZE = 0.3; // Larger than satellites
-const THREAT_COLOR = new THREE.Color(0xffff00); // Yellow
+const THREAT_SIZE = 0.3;
+const THREAT_COLOR = new THREE.Color(0xffff00);
 const THREAT_BASE_ORBIT_RADIUS = 8;
 const THREAT_ORBIT_VARIATION = 1;
-const THREAT_DETECTION_RADIUS = 2.5; // Distance at which satellites detect threats
-const THREAT_DETECTION_RADIUS_SQ = THREAT_DETECTION_RADIUS * THREAT_DETECTION_RADIUS; // Use squared distance for efficiency
+const THREAT_DETECTION_RADIUS = 2.5; // Inner radius for evasion (Red)
+const THREAT_NEAR_RADIUS = 4.0;      // Outer radius for monitoring (Yellow)
+const THREAT_DETECTION_RADIUS_SQ = THREAT_DETECTION_RADIUS * THREAT_DETECTION_RADIUS;
+const THREAT_NEAR_RADIUS_SQ = THREAT_NEAR_RADIUS * THREAT_NEAR_RADIUS;
 
 // Maneuver constants
 const EVASION_RADIUS_DELTA = 0.5; // How much the orbit radius changes during evasion
@@ -45,6 +47,8 @@ const threatWorldPos = new THREE.Vector3();
 function init() {
     // Scene
     scene = new THREE.Scene();
+    // Optional: Add faint fog for depth
+    // scene.fog = new THREE.Fog(0x000000, 20, 150);
 
     // Camera
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -62,6 +66,9 @@ function init() {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(5, 3, 5);
     scene.add(directionalLight);
+
+    // Starfield
+    createStarfield();
 
     // Earth
     const textureLoader = new THREE.TextureLoader();
@@ -100,6 +107,30 @@ function init() {
     animate();
 }
 
+function createStarfield() {
+    const starVertices = [];
+    for (let i = 0; i < 10000; i++) {
+        const x = THREE.MathUtils.randFloatSpread(200); // Adjust spread as needed
+        const y = THREE.MathUtils.randFloatSpread(200);
+        const z = THREE.MathUtils.randFloatSpread(200);
+        // Ensure stars are somewhat distant
+        if (x*x + y*y + z*z < 40*40) continue; // Skip stars too close to center
+        starVertices.push(x, y, z);
+    }
+
+    const starGeometry = new THREE.BufferGeometry();
+    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+
+    const starMaterial = new THREE.PointsMaterial({ 
+        color: 0xffffff, 
+        size: 0.1, 
+        sizeAttenuation: true // Stars smaller further away
+    });
+
+    const stars = new THREE.Points(starGeometry, starMaterial);
+    scene.add(stars);
+}
+
 function initSatellites() {
     const satelliteGeometry = new THREE.SphereGeometry(SATELLITE_SIZE, 8, 8);
     // Use a basic material, color will be set per instance
@@ -135,7 +166,7 @@ function initSatellites() {
             speed: speed,
             angle: angle,
             orbitalPlane: orbitalPlane,
-            status: "nominal",
+            status: "nominal", // Can be "nominal", "monitoring", "evading"
             evasionTargetRadius: null,
             evasionTargetInclination: null,
             worldPosition: new THREE.Vector3() // Initialize world position vector
@@ -256,75 +287,82 @@ function setupUI() {
 }
 
 function animate() {
-    // Stop requesting new frames if paused
-    if (isPaused) {
-        return;
-    }
+    if (isPaused) return;
     requestAnimationFrame(animate);
 
-    const delta = clock.getDelta(); // Use clock for accurate delta time
+    const delta = clock.getDelta();
     let colorNeedsUpdate = false;
 
-    // Update threat positions first
+    // Update threat positions
     if (threatMeshes.length > 0) {
-        for (let i = 0; i < threatsData.length; i++) { // Use threatsData.length as it can change
+        for (let i = 0; i < threatsData.length; i++) {
             threatsData[i].angle += threatsData[i].speed * delta;
             updateThreatPosition(i);
         }
     }
 
-    // Update satellite positions, check for threats, and perform maneuvers
+    // Update satellites
     if (satelliteMesh) {
         for (let i = 0; i < SATELLITE_COUNT; i++) {
             const satData = satellitesData[i];
+            const previousStatus = satData.status;
 
-            // 1. Check proximity to threats
-            let isNearThreat = false;
+            // 1. Find minimum distance to any threat
+            let minDistSq = Infinity;
             if (threatMeshes.length > 0) {
-                 satWorldPos.copy(satData.worldPosition);
-                 for (let j = 0; j < threatsData.length; j++) { // Use threatsData.length
+                satWorldPos.copy(satData.worldPosition);
+                for (let j = 0; j < threatsData.length; j++) {
                     threatWorldPos.copy(threatsData[j].mesh.position);
-                    const distSq = satWorldPos.distanceToSquared(threatWorldPos);
-                    if (distSq < THREAT_DETECTION_RADIUS_SQ) {
-                        isNearThreat = true;
-                        break;
-                    }
+                    minDistSq = Math.min(minDistSq, satWorldPos.distanceToSquared(threatWorldPos));
                 }
             }
 
-            // 2. Update status, color, target radius
-            if (isNearThreat && satData.status === "nominal") {
-                satData.status = "evading";
-                satData.evasionTargetRadius = satData.originalRadius + EVASION_RADIUS_DELTA;
-                satelliteMesh.setColorAt(i, COLOR_EVADING);
-                colorNeedsUpdate = true;
-            } else if (!isNearThreat && satData.status === "evading") {
-                satData.status = "nominal";
-                satData.evasionTargetRadius = satData.originalRadius; // Target the original radius
-                satelliteMesh.setColorAt(i, COLOR_NOMINAL);
-                colorNeedsUpdate = true;
+            // 2. Determine new status based on distance
+            let newStatus = "nominal";
+            let newColor = COLOR_NOMINAL;
+            if (minDistSq < THREAT_DETECTION_RADIUS_SQ) {
+                newStatus = "evading";
+                newColor = COLOR_EVADING;
+            } else if (minDistSq < THREAT_NEAR_RADIUS_SQ) {
+                newStatus = "monitoring";
+                newColor = COLOR_NEAR; // Use yellow for monitoring
             }
 
-            // 3. Smoothly adjust radius towards target
+            // 3. Update status, color, and target radius if changed
+            if (newStatus !== previousStatus) {
+                satData.status = newStatus;
+                satelliteMesh.setColorAt(i, newColor);
+                colorNeedsUpdate = true;
+
+                // Set target radius only when entering/leaving evasion
+                if (newStatus === "evading") {
+                    satData.evasionTargetRadius = satData.originalRadius + EVASION_RADIUS_DELTA;
+                } else if (previousStatus === "evading") { // Was evading, now nominal or monitoring
+                    satData.evasionTargetRadius = satData.originalRadius;
+                }
+            }
+
+            // 4. Smoothly adjust radius towards target (if set)
             if (satData.evasionTargetRadius !== null) {
                 satData.radius = THREE.MathUtils.lerp(satData.radius, satData.evasionTargetRadius, LERP_FACTOR);
                 if (Math.abs(satData.radius - satData.evasionTargetRadius) < 0.01) {
                     satData.radius = satData.evasionTargetRadius;
-                    if (satData.status === "nominal") {
-                         satData.evasionTargetRadius = null;
+                    // Clear target only when returning to original radius and not evading
+                    if (satData.status !== "evading" && satData.radius === satData.originalRadius) {
+                        satData.evasionTargetRadius = null;
                     }
                 }
             }
 
-            // 4. Update angle
+            // 5. Update angle
             satData.angle += satData.speed * delta;
 
-            // 5. Update matrix and world position
+            // 6. Update matrix and world position
             updateSatelliteInstance(i);
 
         } // End satellite loop
 
-        // 6. Signal updates to GPU
+        // 7. Signal updates to GPU
         satelliteMesh.instanceMatrix.needsUpdate = true;
         if (colorNeedsUpdate) {
             satelliteMesh.instanceColor.needsUpdate = true;
