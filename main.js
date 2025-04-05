@@ -14,15 +14,17 @@ const ORBIT_RADIUS_VARIATION = 2; // Max variation in orbit radius
 const SATELLITE_SIZE = 0.05;
 
 // Threat constants
-const THREAT_COUNT = 3;
+const THREAT_COUNT = 3; // Initial count, can increase via UI
 const THREAT_SIZE = 0.3;
 const THREAT_COLOR = new THREE.Color(0xffff00);
 const THREAT_BASE_ORBIT_RADIUS = 8;
 const THREAT_ORBIT_VARIATION = 1;
-const THREAT_DETECTION_RADIUS = 2.5; // Inner radius for evasion (Red)
-const THREAT_NEAR_RADIUS = 4.0;      // Outer radius for monitoring (Yellow)
-const THREAT_DETECTION_RADIUS_SQ = THREAT_DETECTION_RADIUS * THREAT_DETECTION_RADIUS;
-const THREAT_NEAR_RADIUS_SQ = THREAT_NEAR_RADIUS * THREAT_NEAR_RADIUS;
+
+// Thresholds (will be updated by UI)
+let THREAT_DETECTION_RADIUS = 2.5; // Inner radius for evasion (Red)
+let THREAT_NEAR_RADIUS = 4.0;      // Outer radius for monitoring (Yellow)
+let THREAT_DETECTION_RADIUS_SQ = THREAT_DETECTION_RADIUS * THREAT_DETECTION_RADIUS;
+let THREAT_NEAR_RADIUS_SQ = THREAT_NEAR_RADIUS * THREAT_NEAR_RADIUS;
 
 // Maneuver constants
 const EVASION_RADIUS_DELTA = 0.5; // How much the orbit radius changes during evasion
@@ -278,19 +280,59 @@ function onWindowResize() {
 function setupUI() {
     const pauseButton = document.getElementById('pause-resume-button');
     const spawnButton = document.getElementById('spawn-threat-button');
+    const monitorRadiusInput = document.getElementById('monitoring-radius');
+    const evasionRadiusInput = document.getElementById('evasion-radius');
 
+    // Set initial input values
+    monitorRadiusInput.value = THREAT_NEAR_RADIUS.toFixed(1);
+    evasionRadiusInput.value = THREAT_DETECTION_RADIUS.toFixed(1);
+
+    // Pause/Resume listener
     pauseButton.addEventListener('click', () => {
         isPaused = !isPaused;
         pauseButton.textContent = isPaused ? "Resume" : "Pause";
         if (!isPaused) {
-            clock.getDelta(); // Reset delta on resume to avoid large jump
-            animate(); // Restart animation loop if paused
+            clock.getDelta(); 
+            animate();
         }
     });
 
+    // Spawn Threat listener
     spawnButton.addEventListener('click', () => {
-        if (!isPaused) { // Prevent spawning while paused if desired
+        if (!isPaused) {
              spawnSingleThreat();
+        }
+    });
+
+    // Monitor Radius listener
+    monitorRadiusInput.addEventListener('input', (event) => {
+        const newValue = parseFloat(event.target.value);
+        if (!isNaN(newValue) && newValue >= 0) {
+            THREAT_NEAR_RADIUS = newValue;
+            // Ensure Monitor radius is always >= Evasion radius
+            if (THREAT_NEAR_RADIUS < THREAT_DETECTION_RADIUS) {
+                THREAT_DETECTION_RADIUS = THREAT_NEAR_RADIUS;
+                evasionRadiusInput.value = THREAT_DETECTION_RADIUS.toFixed(1); // Update other input
+                THREAT_DETECTION_RADIUS_SQ = THREAT_DETECTION_RADIUS * THREAT_DETECTION_RADIUS;
+            }
+            THREAT_NEAR_RADIUS_SQ = THREAT_NEAR_RADIUS * THREAT_NEAR_RADIUS;
+            console.log(`Monitor Radius set to: ${THREAT_NEAR_RADIUS}`);
+        }
+    });
+
+    // Evasion Radius listener
+    evasionRadiusInput.addEventListener('input', (event) => {
+        const newValue = parseFloat(event.target.value);
+        if (!isNaN(newValue) && newValue >= 0) {
+            THREAT_DETECTION_RADIUS = newValue;
+            // Ensure Evasion radius is always <= Monitor radius
+            if (THREAT_DETECTION_RADIUS > THREAT_NEAR_RADIUS) {
+                THREAT_NEAR_RADIUS = THREAT_DETECTION_RADIUS;
+                monitorRadiusInput.value = THREAT_NEAR_RADIUS.toFixed(1); // Update other input
+                THREAT_NEAR_RADIUS_SQ = THREAT_NEAR_RADIUS * THREAT_NEAR_RADIUS;
+            }
+            THREAT_DETECTION_RADIUS_SQ = THREAT_DETECTION_RADIUS * THREAT_DETECTION_RADIUS;
+            console.log(`Evasion Radius set to: ${THREAT_DETECTION_RADIUS}`);
         }
     });
 }

@@ -42,4 +42,25 @@ canvas {
     height: 12px;
     margin-right: 5px;
     border: 1px solid #555; /* Slight border for clarity */
+}
+
+#thresholds {
+    margin-top: 8px; /* Space above threshold controls */
+    border-top: 1px solid #555; /* Separator line */
+    padding-top: 5px;
+}
+
+#thresholds label {
+    display: inline-block;
+    width: 90px; /* Align labels */
+    margin-bottom: 3px;
+}
+
+#thresholds input[type="number"] {
+    width: 50px; /* Adjust width as needed */
+    padding: 2px;
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 3px;
 } 
