@@ -5,11 +5,20 @@ let scene, camera, renderer, controls;
 let earth;
 let satelliteMesh; // InstancedMesh for satellites
 const satellitesData = []; // Array to hold satellite orbital data
+let threatMeshes = []; // Array to hold threat Mesh objects
+const threatsData = []; // Array to hold threat orbital data
 const SATELLITE_COUNT = 1000;
 const EARTH_RADIUS = 5;
 const BASE_ORBIT_RADIUS = 7; // Base radius for orbits (Earth radius + altitude)
 const ORBIT_RADIUS_VARIATION = 2; // Max variation in orbit radius
 const SATELLITE_SIZE = 0.05;
+
+// Threat constants
+const THREAT_COUNT = 3;
+const THREAT_SIZE = 0.3; // Larger than satellites
+const THREAT_COLOR = new THREE.Color(0xffff00); // Yellow
+const THREAT_BASE_ORBIT_RADIUS = 8;
+const THREAT_ORBIT_VARIATION = 1;
 
 // Colors
 const COLOR_NOMINAL = new THREE.Color(0x00ff00); // Green
@@ -48,6 +57,9 @@ function init() {
 
     // Initialize Satellites
     initSatellites();
+
+    // Initialize Threats
+    initThreats();
 
     // Controls
     controls = new OrbitControls(camera, renderer.domElement);
@@ -111,6 +123,45 @@ function initSatellites() {
     scene.add(satelliteMesh);
 }
 
+function initThreats() {
+    const threatGeometry = new THREE.SphereGeometry(THREAT_SIZE, 16, 16);
+    const threatMaterial = new THREE.MeshStandardMaterial({ color: THREAT_COLOR, roughness: 0.5 });
+
+    for (let i = 0; i < THREAT_COUNT; i++) {
+        const threat = new THREE.Mesh(threatGeometry, threatMaterial);
+
+        // Orbital parameters (similar to satellites for now)
+        const radius = THREAT_BASE_ORBIT_RADIUS + Math.random() * THREAT_ORBIT_VARIATION;
+        const speed = (1 / (radius * radius)) * 4; // Slightly different speed factor
+        const angle = Math.random() * Math.PI * 2;
+
+        // Random orbital plane
+        const inclination = Math.random() * Math.PI * 0.2; // Lower inclination threats for now
+        const longitudeOfAscendingNode = Math.random() * Math.PI * 2;
+        const orbitalPlane = new THREE.Quaternion();
+        const rotationAxis = new THREE.Vector3(0, 1, 0);
+        orbitalPlane.setFromAxisAngle(rotationAxis, longitudeOfAscendingNode);
+        const inclinationAxis = new THREE.Vector3(1, 0, 0).applyQuaternion(orbitalPlane);
+        const inclinationQuat = new THREE.Quaternion().setFromAxisAngle(inclinationAxis, inclination);
+        orbitalPlane.multiply(inclinationQuat);
+
+        threatsData.push({
+            id: `threat_${i}`,
+            radius: radius,
+            speed: speed,
+            angle: angle,
+            orbitalPlane: orbitalPlane,
+            mesh: threat // Store reference to the mesh
+        });
+
+        // Calculate initial position
+        updateThreatPosition(i);
+
+        scene.add(threat);
+        threatMeshes.push(threat); // Keep track of mesh objects
+    }
+}
+
 function updateSatelliteInstance(index) {
     const data = satellitesData[index];
 
@@ -129,6 +180,20 @@ function updateSatelliteInstance(index) {
     satelliteMesh.setMatrixAt(index, dummy.matrix);
 }
 
+function updateThreatPosition(index) {
+    const data = threatsData[index];
+    const mesh = data.mesh;
+
+    // Calculate position in the orbital plane
+    const x = data.radius * Math.cos(data.angle);
+    const z = data.radius * Math.sin(data.angle);
+    const y = 0;
+
+    mesh.position.set(x, y, z);
+    // Apply the orbital plane rotation
+    mesh.position.applyQuaternion(data.orbitalPlane);
+}
+
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -138,7 +203,7 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate);
 
-    const delta = 0.016; // Assume ~60 FPS, use clock later for precision
+    const delta = 0.016; // Use THREE.Clock for better accuracy later
 
     // Update satellite positions
     if (satelliteMesh) {
@@ -147,6 +212,14 @@ function animate() {
             updateSatelliteInstance(i);
         }
         satelliteMesh.instanceMatrix.needsUpdate = true; // Must be set after loop
+    }
+
+    // Update threat positions
+    if (threatMeshes.length > 0) {
+        for (let i = 0; i < THREAT_COUNT; i++) {
+            threatsData[i].angle += threatsData[i].speed * delta;
+            updateThreatPosition(i);
+        }
     }
 
     controls.update();
