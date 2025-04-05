@@ -8,8 +8,15 @@
 </head>
 <body>
     <div id="ui-container">
-        <button id="pause-resume-button">Pause</button>
-        <button id="spawn-threat-button">Spawn Threat</button>
+        <div id="controls">
+            <button id="pause-resume-button">Pause</button>
+            <button id="spawn-threat-button">Spawn Threat</button>
+        </div>
+        <div id="legend">
+            <div class="legend-item"><span class="legend-color" style="background-color: #00ff00;"></span> Nominal</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #ffff00;"></span> Monitoring</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #ff0000;"></span> Evading</div>
+        </div>
     </div>
 
     <script type="importmap">

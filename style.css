@@ -15,10 +15,31 @@ canvas {
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     padding: 5px;
     border-radius: 5px;
+    color: white; /* Added for text visibility */
+    font-family: sans-serif; /* Basic font */
+    font-size: 12px;
+}
+
+#controls {
+    margin-bottom: 5px; /* Space between controls and legend */
 }
 
 #ui-container button {
     margin: 2px;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+#legend .legend-item {
+    margin-bottom: 3px;
+    display: flex; /* Align color box and text */
+    align-items: center;
+}
+
+#legend .legend-color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border: 1px solid #555; /* Slight border for clarity */
 } 
