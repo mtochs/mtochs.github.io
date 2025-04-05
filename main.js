@@ -133,12 +133,13 @@ function createStarfield() {
 
 function initSatellites() {
     const satelliteGeometry = new THREE.SphereGeometry(SATELLITE_SIZE, 8, 8);
-    // Use a basic material, color will be set per instance
     const satelliteMaterial = new THREE.MeshStandardMaterial({ roughness: 0.7, metalness: 0.5 });
 
     satelliteMesh = new THREE.InstancedMesh(satelliteGeometry, satelliteMaterial, SATELLITE_COUNT);
+    // Set matrix usage - this is usually safe here
     satelliteMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-    satelliteMesh.instanceColor.setUsage(THREE.DynamicDrawUsage); // Also set color usage to dynamic
+    // Defer setting instanceColor usage until after colors are set
+    // satelliteMesh.instanceColor.setUsage(THREE.DynamicDrawUsage); // <--- Removed from here (line 141)
 
     for (let i = 0; i < SATELLITE_COUNT; i++) {
         // Orbital parameters
@@ -174,10 +175,18 @@ function initSatellites() {
 
         // Set initial position and color
         updateSatelliteInstance(i);
+        // This call should initialize instanceColor if needed
         satelliteMesh.setColorAt(i, COLOR_NOMINAL);
     }
 
-    satelliteMesh.instanceColor.needsUpdate = true;
+    // Now that setColorAt has been called, instanceColor should exist
+    if (satelliteMesh.instanceColor) {
+        satelliteMesh.instanceColor.setUsage(THREE.DynamicDrawUsage);
+        satelliteMesh.instanceColor.needsUpdate = true;
+    } else {
+        console.error("InstancedMesh instanceColor attribute is unexpectedly null after setting colors.");
+    }
+
     scene.add(satelliteMesh);
 }
 
