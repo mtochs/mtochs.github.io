@@ -7,34 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="simulation-container"></div>
-    <div id="ui-container">
-        <h1>Lattice for Space</h1>
-        <button id="pause-button">Pause</button>
-        <button id="spawn-threat-button">Spawn Threat</button>
-        <div id="info-panel">
-            <p>Satellites: <span id="satellite-count">0</span></p>
-            <p>Threats: <span id="threat-count">0</span></p>
-            <p>Status: <span id="status-info">Nominal: 0 | Evading: 0</span></p>
-            <p>Paused: <span id="paused-status">false</span></p>
-        </div>
-         <div id="legend">
-            <p><span style="color: #00ff00;">●</span> Nominal</p>
-            <p><span style="color: #ff0000;">●</span> Evading</p>
-            <p><span style="color: #ffff00;">●</span> Threat</p>
-        </div>
-    </div>
-
-    <!-- Import maps for ES6 module handling -->
     <script type="importmap">
-    {
-        "imports": {
-            "three": "./js/three.module.js",
-            "three/addons/": "./js/"
+        {
+            "imports": {
+                "three": "./js/three.module.js",
+                "three/addons/controls/OrbitControls.js": "./js/OrbitControls.js"
+            }
         }
-    }
     </script>
-
     <script type="module" src="main.js"></script>
 </body>
-</html>
+</html> 
