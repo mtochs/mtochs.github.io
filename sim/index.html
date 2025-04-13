@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lattice for Space: Orbital Autonomy Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="ui-container">
+        <div id="controls">
+            <button id="pause-resume-button">Pause</button>
+            <button id="spawn-threat-button">Spawn Threat</button>
+        </div>
+        <div id="legend">
+            <div class="legend-item"><span class="legend-color" style="background-color: #00ff00;"></span> Nominal</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #ffff00;"></span> Monitoring</div>
+            <div class="legend-item"><span class="legend-color" style="background-color: #ff0000;"></span> Evading</div>
+        </div>
+        <div id="thresholds">
+            <label for="monitoring-radius">Monitor Radius:</label>
+            <input type="number" id="monitoring-radius" name="monitoring-radius" step="0.1" min="0">
+            <br>
+            <label for="evasion-radius">Evasion Radius:</label>
+            <input type="number" id="evasion-radius" name="evasion-radius" step="0.1" min="0">
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "./js/three.module.js",
+                "three/addons/controls/OrbitControls.js": "./js/OrbitControls.js"
+            }
+        }
+    </script>
+    <script type="module" src="main.js"></script>
+</body>
+</html> 
